@@ -19,40 +19,42 @@ app.post('/search', (req, res) => {
         console.log('error getting geodata ', err);
       } else {
         var geo = JSON.parse(geoBody);
-        var lat = geo.results[0].geometry.location.lat;
-        var lon = geo.results[0].geometry.location.lng;
-        console.log('calced lat is ', lat, ' calced lon is ', lon)
-        console.log(typeof lat, typeof lon)
-        if(lat !== '') {
-          weather.getData(lat, lon, (err, resp, body) => {
-            if(err) {
-              console.log('error getting data', err)
-            } else {
-              var weather = JSON.parse(body);
-              if(weather.latitude) {
-              var t = new Date(weather.currently.time*1000);
-              weather = {
-                latitude: weather.latitude,
-                longitude: weather.longitude,
-                time: t,
-                currentSummary: weather.currently.summary,
-                currentIcon: weather.currently.icon,
-                currentTemperature: weather.currently.temperature,
-                dailySummary: weather.daily.data[0].summary,
-                dailyHigh: weather.daily.data[0].temperatureHigh,
-                dailyLow: weather.daily.data[0].temperatureLow,
-                dailyPrecipProbability: weather.daily.data[0].precipProbability,
-              };
-              db.save(weather, () => {
-                console.log('i think this was saved ', weather);
-                res.send(JSON.stringify(weather));
-              });
-            } else {
-                res.send('weather was undefined')
-            }
-            }
-          });
-        }
+        if(geo.results.length) {
+          var lat = geo.results[0].geometry.location.lat;
+          var lon = geo.results[0].geometry.location.lng;
+          console.log('calced lat is ', lat, ' calced lon is ', lon)
+          console.log(typeof lat, typeof lon)
+          if(lat !== '') {
+            weather.getData(lat, lon, (err, resp, body) => {
+              if(err) {
+                console.log('error getting data', err)
+              } else {
+                var weather = JSON.parse(body);
+                if(weather.latitude) {
+                var t = new Date(weather.currently.time*1000);
+                weather = {
+                  latitude: weather.latitude,
+                  longitude: weather.longitude,
+                  time: t,
+                  currentSummary: weather.currently.summary,
+                  currentIcon: weather.currently.icon,
+                  currentTemperature: weather.currently.temperature,
+                  dailySummary: weather.daily.data[0].summary,
+                  dailyHigh: weather.daily.data[0].temperatureHigh,
+                  dailyLow: weather.daily.data[0].temperatureLow,
+                  dailyPrecipProbability: weather.daily.data[0].precipProbability,
+                };
+                db.save(weather, () => {
+                  console.log('i think this was saved ', weather);
+                  res.send(JSON.stringify(weather));
+                });
+              } else {
+                  res.send('weather was undefined')
+              }
+              }
+            });
+          }
+      }
     }
   });
   });
