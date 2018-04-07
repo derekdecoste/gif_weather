@@ -11,7 +11,6 @@ app.use(express.static(path.resolve(__dirname, '../client/public')));
 
 app.post('/search', (req, res) => {
   req.on('data', data => {
-    // send to google's api to get lat and lon here, in success of this, call getData below
     var city = data.toString().slice(5);
     geocoding.getData(city, (err, response, geoBody) => {
       if(err) {
