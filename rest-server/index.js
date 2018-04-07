@@ -13,7 +13,6 @@ app.post('/search', (req, res) => {
   req.on('data', data => {
     // send to google's api to get lat and lon here, in success of this, call getData below
     var city = data.toString().slice(5);
-    console.log('city is ', city)
     geocoding.getData(city, (err, response, geoBody) => {
       if(err) {
         console.log('error getting geodata ', err);
@@ -22,8 +21,6 @@ app.post('/search', (req, res) => {
         if(geo.results.length) {
           var lat = geo.results[0].geometry.location.lat;
           var lon = geo.results[0].geometry.location.lng;
-          console.log('calced lat is ', lat, ' calced lon is ', lon)
-          console.log(typeof lat, typeof lon)
           if(lat !== '') {
             weather.getData(lat, lon, (err, resp, body) => {
               if(err) {
@@ -45,7 +42,6 @@ app.post('/search', (req, res) => {
                   dailyPrecipProbability: weather.daily.data[0].precipProbability,
                 };
                 db.save(weather, () => {
-                  console.log('i think this was saved ', weather);
                   res.send(JSON.stringify(weather));
                 });
               } else {

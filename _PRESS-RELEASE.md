@@ -1,23 +1,23 @@
-Weather fetcher
+Gif your Weather
 
-Click on a location on a map and get a weather report for that location, sometimes with fun side effects!
+Get weather with GIFs and store it all to a database for future laughter!
 
-Get weather at the click of a button! Are your weather reports too boring? Do you want some fun along with them? Look no more!
+Are your weather reports too boring? Do you want some fun along with them? Look no more!
 
 Problem
 Weather reports are boring
 
 Solution
-Describe how your product elegantly solves the problem.
+Boring no more! Laugh along as you become prepared for the day ahead.
 
-Quote from You
-A quote from a spokesperson in your company.
+Quote from employee
+'Stop being bored with your weather reports!
 
 How to Get Started
 Describe how easy it is to get started.
 
 Customer Quote
-Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+'Shit's hilarious, yo. I never used to check the weather but now I do!'
 
 Closing and Call to Action
 Wrap it up and give pointers where the reader should go next.

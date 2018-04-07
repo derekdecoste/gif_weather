@@ -34,16 +34,10 @@ class App extends React.Component {
   }
 
   search(city) {
-    console.log('searching...city ', city)
     var str = city.replace(/,/g, '');
-    console.log('after formatting ', str)
-    $.post('/search', {city: str} , (dataPost) => { // make this restful later but for now display data on page
-      //$.get('/search', (dataGet) => {
+    $.post('/search', {city: str} , (dataPost) => {
         var temp = JSON.parse(dataPost);
-        console.log('post data ', temp);
-
         this.setState({ weather: temp, lat: temp.latitude, lon: temp.longitude});
-      //});
     });
   }
 
@@ -53,13 +47,6 @@ class App extends React.Component {
 
   onChange(e) {
     this.setState({ city: e.target.value})
-  }
-
-  initMap() {
-    // map = new google.maps.Map(document.getElementById('map'), {
-    //   center: {lat: -34.397, lng: 150.644},
-    //   zoom: 8
-    //})
   }
 
   render() {
