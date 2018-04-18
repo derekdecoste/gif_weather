@@ -7,18 +7,13 @@ class Weather extends React.Component {
     super(props)
   }
 
-  shouldComponentUpdate(nextProps) {
-    const differentTime = this.props.weather.time !== nextProps.weather.time;
-    return differentTime;
-}
-
   render() {
     return (
       <div>
         <div id="currentWeather">
           Currently {this.props.weather.currentSummary} and {Math.floor(this.props.weather.currentTemperature)} degrees
         </div>
-        <img id="gif" src={weatherGifs.weatherGifDecider(this.props.weather)}/>
+        <img id="pig" src={weatherGifs.weatherGifDecider(this.props.weather)}/>
       </div>
     )
   }
